@@ -16,11 +16,13 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request)
     {
-        if (Auth::attempt($request->all())) {
+        if (Auth::attempt($request->validated())) {
             $user = Auth::user();
 
+            $token = $user->createToken('myAppToken');
+
             return (new UserResource($user))->additional([
-                'token' => $user->createToken('myAppToken')->plainTextToken
+                'token' => $token->plainTextToken
             ]);
 
             return response()->json([
