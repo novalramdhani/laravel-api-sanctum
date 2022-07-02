@@ -16,7 +16,10 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request)
     {
-        $user = User::create($request->all());
+        $attr = $request->all();
+
+        $attr['password'] = bcrypt($request->password);
+        $user = User::create($attr);
 
         $token = $user->createToken('myAppToken');
 
