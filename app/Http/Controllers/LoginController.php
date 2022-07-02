@@ -24,12 +24,12 @@ class LoginController extends Controller
             return (new UserResource($user))->additional([
                 'token' => $token->plainTextToken
             ]);
-
-            return response()->json([
-                'code' => 401,
-                'status' => false,
-                'message' => 'Your credentials must be match'
-            ], 401);
         }
+
+        return response()->json([
+            'code' => 401,
+            'status' => false,
+            'message' => 'Your credentials must be match'
+        ], 401);
     }
 }
