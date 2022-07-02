@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -12,8 +14,14 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(RegisterRequest $request)
     {
-        //
+        $user = User::create($request->all());
+
+        $token = $user->createToken('myAppToken');
+
+        return (new UserResource($user))->additional([
+            'token' => $token->plainTextToken
+        ]);
     }
 }
