@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogOutAllController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -13,6 +14,8 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', LogOutController::class);
+
+        Route::post('/logout-all', LogOutAllController::class);
 
         Route::apiResource('posts', PostController::class)
                     ->only(['index', 'show']);
