@@ -21,14 +21,10 @@ class RegisterController extends Controller
         $attr['password'] = bcrypt($request->password);
         $user = User::create($attr);
 
-        $token = $user->createToken('myAppToken');
-
         return (new UserResource($user))->additional([
             'status' => true,
             'code' => 200,
             'message' => 'New user created successfully.',
-            'token' => $token->plainTextToken,
-            'type' => 'Bearer'
         ]);
     }
 }
