@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -12,6 +11,13 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return new PostResource($posts);
+        return PostResource::collection($posts);
+    }
+
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
+
+        return (new PostResource($post));
     }
 }

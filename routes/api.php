@@ -10,10 +10,11 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', LoginController::class);
     Route::post('/register', RegisterController::class);
 
-    Route::post('/logout', LogOutController::class)
-            ->middleware('auth:sanctum');
 
-    Route::apiResource('posts', PostController::class)
-                ->middleware('auth:sanctum')
-                ->only(['index', 'show']);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', LogOutController::class);
+
+        Route::apiResource('posts', PostController::class)
+                    ->only(['index', 'show']);
+    });
 });
