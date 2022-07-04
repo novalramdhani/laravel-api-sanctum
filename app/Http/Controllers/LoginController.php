@@ -22,7 +22,11 @@ class LoginController extends Controller
             $token = $user->createToken('myAppToken');
 
             return (new UserResource($user))->additional([
-                'token' => $token->plainTextToken
+                'status' => true,
+                'code' => 200,
+                'message' => 'You successfully login!.',
+                'token' => $token->plainTextToken,
+                'type' => 'Bearer'
             ]);
         }
 
