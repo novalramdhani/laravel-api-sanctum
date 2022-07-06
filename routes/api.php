@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogOutAllController;
-use App\Http\Controllers\LogOutController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\{
+    LoginController,
+    LogOutAllController,
+    LogOutController,
+    PostController,
+    RegisterController
+};
+
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
