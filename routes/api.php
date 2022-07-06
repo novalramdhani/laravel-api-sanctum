@@ -10,7 +10,7 @@ use App\Http\Controllers\{
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
+Route::middleware('cache.headers:public;max_age=2628000;etag')->prefix('v1')->group(function () {
     Route::post('/login', LoginController::class);
     Route::post('/register', RegisterController::class);
 
