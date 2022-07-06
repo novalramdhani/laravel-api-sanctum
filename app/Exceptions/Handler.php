@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -66,6 +67,14 @@ class Handler extends ExceptionHandler
                 'status' => false,
                 'message' => 'Resource Not Found.'
             ], 404);
+        }
+
+        if ($e instanceof TooManyRequestsHttpException) {
+            return response()->json([
+                'code' => 429,
+                'status' => false,
+                'message' => 'Too Many Requests.'
+            ]);
         }
 
         return parent::render($request, $e);
