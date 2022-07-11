@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LogOutAllController extends Controller
 {
@@ -20,7 +21,7 @@ class LogOutAllController extends Controller
 
         return response()->json([
             'status' => true,
-            'code' => 200,
+            'code' => Response::HTTP_OK,
             'message' => 'Logout with all tokens delete successfully.'
         ]);
     }

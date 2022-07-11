@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LogOutController extends Controller
 {
@@ -18,7 +19,7 @@ class LogOutController extends Controller
 
         return response()->json([
             'status' => true,
-            'code' => 200,
+            'code' => Response::HTTP_OK,
             'message' => 'Logout successfully.'
         ]);
     }

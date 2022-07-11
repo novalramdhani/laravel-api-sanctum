@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -23,7 +24,7 @@ class LoginController extends Controller
 
             return (new UserResource($user))->additional([
                 'status' => true,
-                'code' => 200,
+                'code' => Response::HTTP_OK,
                 'message' => 'You successfully login!.',
                 'token' => $token->plainTextToken,
                 'type' => 'Bearer'
@@ -31,9 +32,9 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'code' => 401,
+            'code' => Response::HTTP_UNAUTHORIZED,
             'status' => false,
             'message' => 'Your credentials must be match'
-        ], 401);
+        ], Response::HTTP_UNAUTHORIZED);
     }
 }

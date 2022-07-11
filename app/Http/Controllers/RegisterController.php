@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -23,7 +24,7 @@ class RegisterController extends Controller
 
         return (new UserResource($user))->additional([
             'status' => true,
-            'code' => 200,
+            'code' => Response::HTTP_OK,
             'message' => 'New user created successfully.',
         ]);
     }
